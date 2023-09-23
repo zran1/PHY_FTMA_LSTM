@@ -103,13 +103,13 @@ def TimeSeries(dataset, start_index, history_size, end_index, step,
     
     return np.array(data), np.array(labels)
 
-history_size = 18  
-target_size = 7  
+history_size = 12  
+target_size = 0  
 step = 1  
 batchsize = 64
-units = 128
+units = 256
 lr = 0.001
-epochs = 100  
+epochs = 200  
 
 x_train1, y_train1 = TimeSeries(dataset=df, start_index=0, history_size=history_size, end_index=train_num1, step=step, target_size=target_size, true=targets)
 x_train2, y_train2 = TimeSeries(dataset=df, start_index=train_num1, history_size=history_size, end_index=train_num2, step=step, target_size=target_size, true=targets)
@@ -166,13 +166,8 @@ test_ds = test_ds.batch(batchsize)
 
 
 sample = next(iter(train_ds))  
-print('x_train.shape:', sample[0].shape)  
-print('y_train.shape:', sample[1].shape)  
-
-
 inputs_shape = sample[0].shape[1:]  
 inputs = keras.Input(shape=inputs_shape)  
-
 
 
 input_dim = int(inputs.shape[2])
