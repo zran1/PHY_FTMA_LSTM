@@ -11,7 +11,6 @@ from keras.layers.core import *
 from keras.layers.rnn.lstm import LSTM
 from keras.models import *
 from keras import backend as K
-import matplotlib.ticker as ticker
 from keras.losses import mean_squared_error
 from keras import  callbacks
 
@@ -217,8 +216,6 @@ y_predp = model(newinputsp)
 y_prede = model(newinputse)
 y_preds = model(newinputss)
 y_pred = model(x_train)
-print(y_predp)
-print(y_pred)
 delta_p = y_pred - y_predp
 delta_e = y_prede - y_pred
 delta_s = y_pred - y_preds
@@ -236,10 +233,8 @@ es = callbacks.EarlyStopping(monitor='loss', mode='min', verbose=1, patience=20,
 history = model.fit(x_train, y_train, batch_size= batchsize, epochs=epochs, callbacks= [es])
 
 
-
 history_dict = history.history  
 train_loss = history_dict['loss']  
-
 
 y_moni = model.predict(x_train)  
 y_t = y_moni[:,0]
@@ -261,7 +256,6 @@ x_predict = x_test
 y_true = y_test  
 y_predict = model.predict(x_predict)  
 y_predict = y_predict[:,0]
-
 
 y_true = y_true*(maxs-mins)+mins
 y_predict = y_predict*(maxs-mins)+mins
@@ -285,8 +279,6 @@ draw.iloc[:,1].plot(figsize=(12,6))
 plt.legend(('real', 'predict'),loc='upper right',fontsize='15')
 plt.title("Test Data",fontsize='30')
 plt.savefig(r"D:\Pycharm\对比.png",dpi=300)
-g.ax.tick_params(labelsize=15) 
-plt.savefig(r"D:\Pycharm\biye\修改\PHY-FTMA-LSTM\0权重图.png",dpi=300)
 train.to_excel(r"D:\Pycharm\PHY-FTMA-LSTM训练结果.xlsx")
 result.to_excel(r"D:\Pycharm\0PHY-FTMA-LSTM预测结果.xlsx")
 
