@@ -37,7 +37,7 @@ def KGE(ym, ys):
     return KGE
 
 
-df1=pd.read_excel(r'D:/Pycharm/biye/降雨洪水5.xlsx')
+df1=pd.read_excel(r'D:/Pycharm/data.xlsx')
 
 
 feat = df1.iloc[:, 1:5]  
